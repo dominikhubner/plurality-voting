@@ -1,8 +1,6 @@
 # plurality-voting
 Plurality voting is an electoral system in which each voter is allowed to vote for only one candidate, and the candidate who polls more than any other counterpart (a plurality) is elected.
 
-needs [libcs50 library](https://github.com/cs50/libcs50)
-
 compile the code with make:
 ```console
 $ make ./plurality

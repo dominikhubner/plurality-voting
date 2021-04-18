@@ -1,6 +1,7 @@
-#include <cs50.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 // Max number of candidates
 #define MAX 9
@@ -8,7 +9,7 @@
 // Candidates have name and vote count
 typedef struct
 {
-    string name;
+    char *name;
     int votes;
 }
 candidate;
@@ -20,10 +21,11 @@ candidate candidates[MAX];
 int candidate_count;
 
 // Function prototypes
-bool vote(string name);
+bool vote(char *name);
 void print_winner(void);
+char *inputString(FILE* fp, size_t size);
 
-int main(int argc, string argv[])
+int main(int argc, char *argv[])
 {
     // Check for invalid usage
     if (argc < 2)
@@ -45,12 +47,16 @@ int main(int argc, string argv[])
         candidates[i].votes = 0;
     }
 
-    int voter_count = get_int("Number of voters: ");
+    int voter_count;
+    printf("Number of voters: ");
+    scanf("%d", &voter_count);
 
     // Loop over all voters
     for (int i = 0; i < voter_count; i++)
     {
-        string name = get_string("Vote: ");
+        char *name;
+        printf("Vote: ");
+        name = inputString(stdin, 10);
 
         // Check for invalid vote
         if (!vote(name))
@@ -64,7 +70,7 @@ int main(int argc, string argv[])
 }
 
 // Update vote totals given a new vote
-bool vote(string name)
+bool vote(char *name)
 {
     for (int i = 0; i < candidate_count; i++)
     {
@@ -98,3 +104,20 @@ void print_winner(void)
     return;
 }
 
+char *inputString(FILE* fp, size_t size){
+    char *str;
+    int ch;
+    size_t len = 0;
+    str = realloc(NULL, sizeof(*str)*size);
+    if(!str)return str;
+    while(EOF!=(ch=fgetc(fp)) && ch != '\n'){
+        str[len++]=ch;
+        if(len==size){
+            str = realloc(str, sizeof(*str)*(size+=16));
+            if(!str)return str;
+        }
+    }
+    str[len++]='\0';
+
+    return realloc(str, sizeof(*str)*len);
+}
