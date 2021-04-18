@@ -92,7 +92,7 @@ void print_winner(void)
     {
         if (candidates[i].votes == highest_number)
         {
-            printf("winner. %s\n", candidates[i].name);
+            printf("winner: %s\n", candidates[i].name);
         }
     }
     return;
