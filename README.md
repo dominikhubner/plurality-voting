@@ -3,7 +3,7 @@ Plurality voting is an electoral system in which each voter is allowed to vote f
 
 compile the code with make:
 ```console
-$ make ./plurality.c
+$ make ./plurality
 ```
 usage:
 ```console
