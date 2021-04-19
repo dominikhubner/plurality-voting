@@ -50,6 +50,8 @@ int main(int argc, char *argv[])
     int voter_count;
     printf("Number of voters: ");
     scanf("%d", &voter_count);
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {}
 
     // Loop over all voters
     for (int i = 0; i < voter_count; i++)
